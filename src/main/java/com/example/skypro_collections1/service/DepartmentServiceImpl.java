@@ -1,6 +1,8 @@
 package com.example.skypro_collections1.service;
 
 import com.example.skypro_collections1.Employee;
+import com.example.skypro_collections1.exceptions.IncorrectDepartmentException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -16,7 +18,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Employee getEmployeeWithMaxSalaryByDepartment(Integer department) {
-
+        if(!StringUtils.isNumeric(department.toString())){
+            throw new IncorrectDepartmentException();
+        }
         return employeeService.getEmployees().values().stream()
                 .filter(e -> e.getDepartment() == department)
                 .sorted(new Comparator<Employee>() {
@@ -30,7 +34,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
     @Override
     public Employee getEmployeeWithMinSalaryByDepartment(Integer department) {
-
+        if(!StringUtils.isNumeric(department.toString())){
+            throw new IncorrectDepartmentException();
+        }
         return employeeService.getEmployees().values().stream()
                 .filter(e -> e.getDepartment() == department)
                 .sorted(new Comparator<Employee>() {
@@ -44,7 +50,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
     @Override
     public Set<Employee> getAllEmployeeByDepartment(Integer department) {
-
+        if(!StringUtils.isNumeric(department.toString())){
+            throw new IncorrectDepartmentException();
+        }
         return employeeService.getEmployees().values().stream()
                 .filter(e -> e.getDepartment() == department)
                 .collect(Collectors.toSet());

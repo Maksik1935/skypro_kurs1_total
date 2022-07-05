@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 public interface EmployeeService {
+    boolean checkName(String firstName, String lastName);
     boolean addEmployee(String firstName, String lastName, Integer salary, Integer department);
     public boolean removeEmployee(String firstName, String lastName);
     public Employee findEmployee(String firstName, String lastName);
