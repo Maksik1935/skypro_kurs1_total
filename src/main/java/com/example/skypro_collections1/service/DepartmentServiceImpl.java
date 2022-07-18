@@ -18,23 +18,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Employee getEmployeeWithMaxSalaryByDepartment(Integer department) {
-        if(!StringUtils.isNumeric(department.toString())){
-            throw new IncorrectDepartmentException();
-        }
-        return employeeService.getEmployees().values().stream()
-                .filter(e -> e.getDepartment() == department)
-                .sorted(new Comparator<Employee>() {
-                    @Override
-                    public int compare(Employee o1, Employee o2) {
-                        return o1.getSalary() - o2.getSalary();
-                    }
-                })
-                .findFirst()
-                .get();
-    }
-    @Override
-    public Employee getEmployeeWithMinSalaryByDepartment(Integer department) {
-        if(!StringUtils.isNumeric(department.toString())){
+        if(department <1) {
             throw new IncorrectDepartmentException();
         }
         return employeeService.getEmployees().values().stream()
@@ -49,8 +33,24 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .get();
     }
     @Override
+    public Employee getEmployeeWithMinSalaryByDepartment(Integer department) {
+        if(department <1) {
+            throw new IncorrectDepartmentException();
+        }
+        return employeeService.getEmployees().values().stream()
+                .filter(e -> e.getDepartment() == department)
+                .sorted(new Comparator<Employee>() {
+                    @Override
+                    public int compare(Employee o1, Employee o2) {
+                        return o1.getSalary() - o2.getSalary();
+                    }
+                })
+                .findFirst()
+                .get();
+    }
+    @Override
     public Set<Employee> getAllEmployeeByDepartment(Integer department) {
-        if(!StringUtils.isNumeric(department.toString())){
+        if(department <1) {
             throw new IncorrectDepartmentException();
         }
         return employeeService.getEmployees().values().stream()

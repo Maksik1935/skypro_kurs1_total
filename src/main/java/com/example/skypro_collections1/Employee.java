@@ -1,5 +1,8 @@
 package com.example.skypro_collections1;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Locale;
 import java.util.Objects;
 
 public class Employee {
@@ -7,6 +10,13 @@ public class Employee {
     private String lastName;
     private Integer salary;
     private Integer department;
+
+    public Employee(String firstName, String lastName, Integer salary, Integer department) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.salary = salary;
+        this.department = department;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -37,13 +47,6 @@ public class Employee {
     }
 
     public void setDepartment(Integer department) {
-        this.department = department;
-    }
-
-    public Employee(String firstName, String lastName, Integer salary, Integer department) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.salary = salary;
         this.department = department;
     }
 
