@@ -23,13 +23,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         }
         return employeeService.getEmployees().values().stream()
                 .filter(e -> e.getDepartment() == department)
-                .sorted(new Comparator<Employee>() {
-                    @Override
-                    public int compare(Employee o1, Employee o2) {
-                        return o2.getSalary() - o1.getSalary();
-                    }
-                })
-                .findFirst()
+                .max(Comparator.comparing(e -> e.getSalary()))
                 .get();
     }
     @Override
@@ -39,13 +33,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         }
         return employeeService.getEmployees().values().stream()
                 .filter(e -> e.getDepartment() == department)
-                .sorted(new Comparator<Employee>() {
-                    @Override
-                    public int compare(Employee o1, Employee o2) {
-                        return o1.getSalary() - o2.getSalary();
-                    }
-                })
-                .findFirst()
+                .min(Comparator.comparing(e -> e.getSalary()))
                 .get();
     }
     @Override
@@ -61,12 +49,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Map<String, String> getAllEmployees() {
 
         return employeeService.getEmployees().values().stream()
-                .sorted(new Comparator<Employee>() {
-                    @Override
-                    public int compare(Employee o1, Employee o2) {
-                        return o1.getDepartment() - o2.getDepartment();
-                    }
-                })
+                .sorted(Comparator.comparing(e -> e.getDepartment()))
                 .collect(Collectors.toMap(e -> "Отдел № " + e.getDepartment().toString(), e -> e.getFirstName() + e.getLastName()));
     }
 
